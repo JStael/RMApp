@@ -1,11 +1,6 @@
 import React from 'react';
 import {Svg, Path} from 'react-native-svg';
 
-interface IconProps {
-  color?: string;
-  size?: number;
-}
-
 export function HeartIcon({color = 'black', size = 24}: IconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
