@@ -6,18 +6,19 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Favorites, Home} from '../screens';
-import {HeartIcon, PokeIcon, PokeTitle} from '../assets';
+import {Favorites, Home, CharacterDetails, Episode} from '../screens';
+import {HeartIcon, Logo, RickAndMortyIcon} from '../assets';
 import theme from '../theme';
 
-type AppTabParamList = {
+export type AppTabParamList = {
   Home: undefined;
   Favorites: undefined;
 };
 
 export type AppStackParamList = {
   AppTabNavigator: NavigatorScreenParams<AppTabParamList>;
-  PokemonDetails: undefined;
+  CharacterDetails: undefined;
+  Episode: {episode: string};
 };
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
@@ -32,7 +33,7 @@ export const AppTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerTitle: () => <PokeTitle />,
+        headerTitle: () => <Logo />,
         headerTitleAlign: 'center',
       }}>
       <Tab.Screen
@@ -41,7 +42,7 @@ export const AppTabNavigator = () => {
         options={{
           title: 'Pokemons',
           tabBarIcon: ({focused}) => (
-            <PokeIcon color={focused ? colors.primary : colors.gray3} />
+            <RickAndMortyIcon color={focused ? colors.primary : colors.gray3} />
           ),
           tabBarShowLabel: false,
         }}
@@ -73,6 +74,16 @@ export function AppStack({initialRouteName = 'AppTabNavigator'}: Props) {
           name="AppTabNavigator"
           component={AppTabNavigator}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CharacterDetails"
+          component={CharacterDetails}
+          options={{title: 'Personagem', headerTitleAlign: 'center'}}
+        />
+        <Stack.Screen
+          name="Episode"
+          component={Episode}
+          options={{title: 'Episódio', headerTitleAlign: 'center'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
